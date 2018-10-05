@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class VendingMachine {
     private ArrayList<Product> products;
     private ArrayList<Coin> coins;
+    private ArrayList<Coin> coinPurchase;
     private double coinSum;
 
     /**
@@ -11,6 +12,7 @@ public class VendingMachine {
     public VendingMachine() {
         products = new ArrayList<>();
         coins = new ArrayList<>();
+        coinPurchase = new ArrayList<>();
         coinSum = 0.0;
     }
 
@@ -20,17 +22,20 @@ public class VendingMachine {
      */
     public VendingMachine(Product product) {
         products = new ArrayList<>();
+        coins = new ArrayList<>();
+        coinPurchase = new ArrayList<>();
         products.add(product);
         coinSum = 0.0;
     }
 
     /**
-     * Constructor to insert a list of product objects and a list of coin objects
+     * Constructor to insert a list of product objects
      * @param listProduct Product arraylist
      */
     public VendingMachine(ArrayList<Product> listProduct) {
         products = new ArrayList<>();
         coins = new ArrayList<>();
+        coinPurchase = new ArrayList<>();
         products.addAll(listProduct);
         coinSum = 0.0;
     }
@@ -60,12 +65,15 @@ public class VendingMachine {
             Product item = products.get(i);
             if (item.getName().equals(product)) {
                 if (coinSum >= item.getCost()) {
+                    coins.addAll(coinPurchase);
                     products.remove(i);
+                    coinPurchase.clear();
+                    coinSum = 0;
                     return item;
                 }
             }
         }
-        return coins;
+        return coinPurchase;
     }
 
     /**
@@ -73,7 +81,7 @@ public class VendingMachine {
      * @param coin Coin object
      */
     public void insertCoins(Coin coin) {
-        coins.add(coin);
+        coinPurchase.add(coin);
         coinSum += coin.getValue();
     }
 
@@ -122,33 +130,43 @@ public class VendingMachine {
         System.out.println(vendingMachine1);
         System.out.println();
 
-        // Testing addProducts
+        // Testing addProduct
         VendingMachine vendingMachine2 = new VendingMachine();
-        vendingMachine2.addProducts(sodaList);
-        vendingMachine2.addProducts(candyList);
-        vendingMachine2.addProducts(chipList);
+        vendingMachine2.addProduct(soda);
+        vendingMachine2.addProduct(candy);
+        vendingMachine2.addProduct(chips);
         System.out.println(vendingMachine2);
+
+        // Testing addProducts
+        VendingMachine vendingMachine6 = new VendingMachine();
+        vendingMachine6.addProducts(sodaList);
+        System.out.println(vendingMachine6);
 
         // Testing insertCoin
         VendingMachine vendingMachine3 = new VendingMachine();
         vendingMachine3.insertCoins(penny);
         vendingMachine3.insertCoins(quarter);
         System.out.println(vendingMachine3.getCoinSum());
+        System.out.println();
 
         // Testing valid purchase
         VendingMachine vendingMachine4 = new VendingMachine(candyList);
+        System.out.println("Initially the vending machine has\n" + vendingMachine4);
         vendingMachine4.insertCoins(quarter);
         vendingMachine4.insertCoins(quarter);
         vendingMachine4.insertCoins(quarter);
         vendingMachine4.insertCoins(quarter);
-        System.out.println(vendingMachine4.purchase("Candy"));
+        vendingMachine4.purchase("Candy");
+        System.out.println();
+        System.out.println("Now it should have one less\n");
+        System.out.println(vendingMachine4);
 
         // Testing invalid purchase
         VendingMachine vendingMachine5 = new VendingMachine(candyList);
         vendingMachine5.insertCoins(quarter);
         System.out.println(vendingMachine5.purchase("Candy"));
 
-        
+
 
     }
 
