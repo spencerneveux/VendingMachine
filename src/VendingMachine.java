@@ -86,6 +86,14 @@ public class VendingMachine {
     }
 
     /**
+     * Method to remove all coins from vending machine
+     * @return Arraylist of coin objects
+     */
+    public ArrayList<Coin> removeCoins() {
+        return coins;
+    }
+
+    /**
      * Getter for coin sum
      * @return double value of coin sum
      */
@@ -94,10 +102,13 @@ public class VendingMachine {
     }
 
     @Override
+    /**
+     * Method to Override toString
+     */
     public String toString() {
         String result = "";
         for (Product product : products) {
-            result += product.getName() + " " + product.getCost() + "\n";
+            result += product.getName() + " $" + product.getCost() + "\n";
         }
         return result;
     }
@@ -165,7 +176,24 @@ public class VendingMachine {
         VendingMachine vendingMachine5 = new VendingMachine(candyList);
         vendingMachine5.insertCoins(quarter);
         System.out.println(vendingMachine5.purchase("Candy"));
+        System.out.println();
 
+        // Walkthrough
+        VendingMachine vm = new VendingMachine();
+        vm.addProducts(candyList);
+        vm.addProducts(sodaList);
+        vm.addProducts(chipList);
+        System.out.println(vm);
+        vm.insertCoins(quarter);
+        vm.insertCoins(quarter);
+        vm.insertCoins(quarter);
+        vm.insertCoins(quarter);
+        vm.purchase("Chips");
+        System.out.println(vm);
+        System.out.println(vm.removeCoins());
+        vm.addProduct(chips);
+        System.out.println();
+        System.out.println(vm);
 
 
     }
