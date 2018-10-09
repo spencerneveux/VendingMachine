@@ -135,21 +135,17 @@ public class VendingMachine {
         vendingMachine2.addProduct(soda);
         vendingMachine2.addProduct(candy);
         vendingMachine2.addProduct(chips);
-        System.out.println("Vending machine with three products");
         System.out.println(vendingMachine2);
 
         // Testing addProducts
         VendingMachine vendingMachine6 = new VendingMachine();
         vendingMachine6.addProducts(sodaList);
-        System.out.println("Vending machine with a list of sodas");
         System.out.println(vendingMachine6);
 
         // Testing insertCoin
         VendingMachine vendingMachine3 = new VendingMachine();
         vendingMachine3.insertCoins(penny);
         vendingMachine3.insertCoins(quarter);
-        System.out.println("Inserting a penny and a quarter.");
-        System.out.println("The sum should be equal to 26 cents");
         System.out.println(vendingMachine3.getCoinSum());
         System.out.println();
 
@@ -160,17 +156,17 @@ public class VendingMachine {
         vendingMachine4.insertCoins(quarter);
         vendingMachine4.insertCoins(quarter);
         vendingMachine4.insertCoins(quarter);
-        System.out.println("Purchasing a candy");
-        System.out.println("Now i have a candy and the vending machine has one less candy");
-        Object myCandyBar = vendingMachine4.purchase("Candy");
+        vendingMachine4.purchase("Candy");
+        System.out.println();
+        System.out.println("Now it should have one less\n");
         System.out.println(vendingMachine4);
 
         // Testing invalid purchase
         VendingMachine vendingMachine5 = new VendingMachine(candyList);
-        System.out.println("Testing an invalid purchase");
-        System.out.println("Trying to buy a candy with only 1 quarter. Should return a quarter");
         vendingMachine5.insertCoins(quarter);
-        System.out.println("This is the change I inserted " + vendingMachine5.purchase("Candy"));
+        System.out.println(vendingMachine5.purchase("Candy"));
+
+
 
     }
 
